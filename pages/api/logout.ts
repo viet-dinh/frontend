@@ -12,17 +12,15 @@ export const config = {
 };
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-	if (req.method !== "POST") {
-		return res.status(404).json("This method is not supported");
+	if (req.method === "POST" || req.method === "GET") {
+		const cookies = new Cookies(req, res);
+		const accessToken = cookies.get("access_token");
+
+		if (!accessToken) {
+			return res.status(200).json({ message: "Already logout" });
+		}
+
+		cookies.set("access_token");
+		res.status(200).json({ message: "Logout successfully" });
 	}
-
-	const cookies = new Cookies(req, res);
-	const accessToken = cookies.get("access_token");
-
-	if (!accessToken) {
-		return res.status(200).json({ message: "Already logout" });
-	}
-
-	cookies.set("access_token");
-	res.status(200).json({ message: "Logout successfully" });
 }

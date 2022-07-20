@@ -3,6 +3,7 @@ import { axiosClient } from "@/request";
 import { SWRConfig } from "swr";
 import { AppPropsWithLayout } from "../models";
 import "../styles/globals.css";
+import { SessionProvider } from "next-auth/react";
 
 import { createEmotionCache, theme } from "@/mui-style";
 import { CacheProvider } from "@emotion/react";
@@ -20,23 +21,29 @@ function MyApp({
 	const Layout = Component.Layout ?? MainLayout;
 
 	return (
-		<CacheProvider value={emotionCache}>
-			<ThemeProvider theme={theme}>
-				{/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
-				<CssBaseline />
+		<SessionProvider
+			// Provider options are not required but can be useful in situations where
+			// you have a short session maxAge time. Shown here with default values.
+			session={pageProps.session}
+		>
+			<CacheProvider value={emotionCache}>
+				<ThemeProvider theme={theme}>
+					{/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
+					<CssBaseline />
 
-				<SWRConfig
-					value={{
-						fetcher: (url) => axiosClient.get(url),
-						shouldRetryOnError: false,
-					}}
-				>
-					<Layout>
-						<Component {...pageProps} />
-					</Layout>
-				</SWRConfig>
-			</ThemeProvider>
-		</CacheProvider>
+					<SWRConfig
+						value={{
+							fetcher: (url) => axiosClient.get(url),
+							shouldRetryOnError: false,
+						}}
+					>
+						<Layout>
+							<Component {...pageProps} />
+						</Layout>
+					</SWRConfig>
+				</ThemeProvider>
+			</CacheProvider>
+		</SessionProvider>
 	);
 }
 
