@@ -7,19 +7,16 @@ export interface AuthProps {
 }
 
 export default function Auth({ children }: AuthProps) {
-	const [originUrl, setOriginUrl] = useState("");
 	const router = useRouter();
-	const { profile, login } = useAuth({ revalidateOnMount: true });
+	const { session, status, signIn, signOut } = useAuth();
 
-	console.log(profile);
 	useEffect(() => {
-		if (profile !== undefined && !profile?.username) {
-			console.log(profile);
+		if (status === "unauthenticated") {
 			router.push("/login");
 		}
-	}, [router, profile]);
+	}, [router, status]);
 
-	if (!profile?.username) {
+	if (!session) {
 		return <div>...Loading</div>;
 	}
 

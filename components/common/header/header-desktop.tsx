@@ -1,4 +1,4 @@
-import { Box, Container, Stack, Link as MuiLink } from "@mui/material";
+import { Box, Container, Stack, Link as MuiLink, Button } from "@mui/material";
 import * as React from "react";
 import { ROUTE_LIST } from "./routes";
 import Link from "next/link";
@@ -11,27 +11,28 @@ export interface HeaderDesktopProps {}
 
 function HeaderDesktop(props: HeaderDesktopProps) {
 	const router = useRouter();
-	const { data: session } = useSession();
-	const { profile } = useAuth({ revalidateOnMount: true });
+	const { status, signIn, signOut } = useAuth();
 
-	const loginPayload =
-		session || profile
-			? {
-					label: "Sign out",
-					path: "/logout",
-			  }
-			: {
-					label: "Sign In",
-					path: "/login",
-			  };
+	const SignButton =
+		status === "authenticated" ? (
+			<Button onClick={() => signOut()} variant="contained" color="success">
+				Log Out
+			</Button>
+		) : (
+			<Button onClick={() => signIn()} variant="outlined" color="error">
+				Login
+			</Button>
+		);
 
-	const NAVS = [...ROUTE_LIST, loginPayload];
+	<Button variant="outlined" color="error">
+		Error
+	</Button>;
 
 	return (
 		<Box display={{ xs: "none", md: "block" }} py={2}>
 			<Container>
-				<Stack direction="row" justifyContent={"flex-end"}>
-					{NAVS.map((route) => {
+				<Stack direction="row" justifyContent={"flex-end"} alignItems="center">
+					{ROUTE_LIST.map((route) => {
 						console.log(router.pathname);
 						return (
 							<Link key={route.path} passHref href={route.path}>
@@ -47,6 +48,7 @@ function HeaderDesktop(props: HeaderDesktopProps) {
 							</Link>
 						);
 					})}
+					<Box marginLeft={2}>{SignButton}</Box>
 				</Stack>
 			</Container>
 		</Box>

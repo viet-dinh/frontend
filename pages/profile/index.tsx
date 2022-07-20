@@ -3,18 +3,17 @@ import AdminLayout from "@/layout/admin";
 import { NextPageWithLayout } from "@/models";
 import { Button } from "@mui/material";
 import { Box, Container } from "@mui/system";
-import * as React from "react";
 
 export interface ProfilePageProps {}
 
 const ProfilePage: NextPageWithLayout = (props: ProfilePageProps) => {
-	const { profile, logout } = useAuth();
+	const { session, signIn, signOut } = useAuth();
 
 	return (
 		<Box>
 			<Container>
-				<div>Profile: {JSON.stringify(profile || {})}</div>
-				<Button onClick={() => logout()}>Log out</Button>
+				<div>Profile: {JSON.stringify(session || {})}</div>
+				<Button onClick={() => signOut()}>Log out</Button>
 			</Container>
 		</Box>
 	);
