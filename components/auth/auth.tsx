@@ -12,9 +12,9 @@ export default function Auth({ children }: AuthProps) {
 
 	useEffect(() => {
 		if (status === "unauthenticated") {
-			router.push("/login");
+			signIn();
 		}
-	}, [router, status]);
+	}, [status, signIn]);
 
 	if (!session) {
 		return <div>...Loading</div>;
