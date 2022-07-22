@@ -5,16 +5,21 @@ import { red } from "@mui/material/colors";
 const theme = createTheme({
 	palette: {
 		primary: {
-			main: "#00BFFF",
+			main: "#00C2FF",
 		},
 		secondary: {
-			main: "#19857b",
+			main: "#fff",
 		},
 		error: {
 			main: red.A400,
 		},
 	},
 	components: {
+		MuiAppBar: {
+			defaultProps: {
+				color: "secondary",
+			},
+		},
 		MuiContainer: {
 			defaultProps: {
 				maxWidth: "md",
@@ -27,7 +32,7 @@ const theme = createTheme({
 				},
 				maxWidthMd: {
 					"@media (min-width: 900px)": {
-						maxWidth: "1024px",
+						maxWidth: "1212px",
 					},
 				},
 			},
@@ -40,7 +45,7 @@ const theme = createTheme({
 				root: {
 					color: "black",
 					"&:hover, &.active": {
-						color: "red",
+						color: "#00C2FF",
 					},
 				},
 			},
@@ -48,6 +53,8 @@ const theme = createTheme({
 	},
 	typography: {
 		fontFamily: [
+			"Montserrat",
+			"Oleo Script",
 			"Noto Serif Display",
 			"-apple-system",
 			"BlinkMacSystemFont",
@@ -60,6 +67,7 @@ const theme = createTheme({
 			'"Segoe UI Emoji"',
 			'"Segoe UI Symbol"',
 		].join(","),
+		fontSize: 12,
 	},
 });
 
