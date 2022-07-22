@@ -14,10 +14,9 @@ export default function MainLayout(props: LayoutProps) {
 	return (
 		<Stack minHeight={"100vh"}>
 			<Header />
-			<Box component={"main"} flexGrow={1}>
-				<Container>{props.children}</Container>
+			<Box component={"main"} flexGrow={1} marginTop={"90px"}>
+				{props.children}
 			</Box>
-
 			<Footer />
 		</Stack>
 	);

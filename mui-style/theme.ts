@@ -1,5 +1,5 @@
 import { createTheme } from "@mui/material/styles";
-import { red } from "@mui/material/colors";
+import { green, red } from "@mui/material/colors";
 
 // Create a theme instance.
 const theme = createTheme({
@@ -13,11 +13,28 @@ const theme = createTheme({
 		error: {
 			main: red.A400,
 		},
+		info: {
+			main: green.A400,
+		},
 	},
 	components: {
 		MuiAppBar: {
 			defaultProps: {
 				color: "secondary",
+			},
+			styleOverrides: {
+				root: {
+					height: "90px",
+				},
+			},
+		},
+		MuiToolbar: {
+			styleOverrides: {
+				root: {
+					"@media (min-width: 600px)": {
+						minHeight: "90px",
+					},
+				},
 			},
 		},
 		MuiContainer: {

@@ -1,10 +1,10 @@
 import { Box } from "@mui/material";
 import * as React from "react";
 
-export interface HeaderMobileProps {}
+export interface FooterMobileProps {}
 
-function HeaderMobile(props: HeaderMobileProps) {
+function FooterMobile(props: FooterMobileProps) {
 	return <Box display={{ xs: "block", md: "none" }}>Please use Desktop</Box>;
 }
 
-export { HeaderMobile };
+export { FooterMobile };

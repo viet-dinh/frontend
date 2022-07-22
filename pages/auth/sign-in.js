@@ -1,4 +1,4 @@
-import { Box, Button, Container } from "@mui/material";
+import { Box, Button, Container, Stack } from "@mui/material";
 import { getProviders, signIn } from "next-auth/react";
 import { useAuth } from "@/hook/auth";
 import { useRouter } from "next/router";
@@ -13,18 +13,24 @@ export default function SignIn({ providers }) {
 
 	return (
 		<Box>
-			<Container>
-				{Object.values(providers).map((provider) => (
-					<div key={provider.name}>
-						<Button
-							variant="outlined"
-							color="secondary"
-							onClick={() => signIn(provider.id)}
-						>
-							Sign in with {provider.name}
-						</Button>
-					</div>
-				))}
+			<Container
+				sx={{
+					paddingTop: 2,
+				}}
+			>
+				<Stack spacing={1} alignItems="center">
+					{Object.values(providers).map((provider) => (
+						<Box maxWidth={"200px"} key={provider.name}>
+							<Button
+								variant="outlined"
+								color="info"
+								onClick={() => signIn(provider.id)}
+							>
+								Sign in with {provider.name}
+							</Button>
+						</Box>
+					))}
+				</Stack>
 			</Container>
 		</Box>
 	);

@@ -1,10 +1,9 @@
 import Auth from "@/components/auth/auth";
-import { Header } from "@/components/common";
+import { Footer, Header } from "@/components/common";
 import { LayoutProps } from "@/models/layout";
-import { authRequest } from "@/request";
-import { Box, Container } from "@mui/system";
-import Link from "next/link";
-import React, { useEffect } from "react";
+import { Stack } from "@mui/material";
+import { Box } from "@mui/system";
+import { useEffect } from "react";
 
 export default function AdminLayout(props: LayoutProps) {
 	useEffect(() => {
@@ -13,15 +12,13 @@ export default function AdminLayout(props: LayoutProps) {
 	}, []);
 	return (
 		<Auth>
-			<Header></Header>
-			<Box>
-				<Container>
-					<Link href={"/"}>
-						<a>Home</a>
-					</Link>
-				</Container>
-			</Box>
-			<div>{props.children}</div>
+			<Stack minHeight={"100vh"}>
+				<Header />
+				<Box component={"main"} flexGrow={1} marginTop={"90px"}>
+					{props.children}
+				</Box>
+				<Footer />
+			</Stack>
 		</Auth>
 	);
 }

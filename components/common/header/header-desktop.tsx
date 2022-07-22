@@ -24,13 +24,6 @@ import { styled } from "@mui/material/styles";
 
 export interface HeaderDesktopProps {}
 
-const StyledToolbar = styled(Toolbar)(({ theme }) => ({
-	// Override media queries injected by theme.mixins.toolbar
-	"@media all": {
-		minHeight: 90,
-	},
-}));
-
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
 
 function HeaderDesktop(props: HeaderDesktopProps) {
@@ -108,19 +101,20 @@ function HeaderDesktop(props: HeaderDesktopProps) {
 
 	return (
 		<Box display={{ xs: "none", md: "block" }}>
-			<AppBar position="static">
+			<AppBar position="fixed">
 				<Container>
 					<Toolbar disableGutters>
 						<Stack
 							direction="row"
-							justifyContent="space-between"
+							justifyContent="center"
 							alignItems="center"
 							width={"100%"}
 						>
 							<Stack
 								direction="row"
-								justifyContent={"flex-end"}
+								justifyContent={"flex-start"}
 								alignItems="center"
+								justifySelf={"flex-start"}
 							>
 								{ROUTE_LIST.map((route) => {
 									console.log(router.pathname);
@@ -144,15 +138,21 @@ function HeaderDesktop(props: HeaderDesktopProps) {
 								})}
 							</Stack>
 
-							<Typography
-								sx={{
-									fontFamily: "Oleo Script",
-									fontSize: 24,
-									alignSelf: "center",
-								}}
-							>
-								VIETTECH
-							</Typography>
+							<Box sx={{ flexGrow: 1, textAlign: "center" }}>
+								<Typography
+									sx={{
+										fontFamily: "Oleo Script",
+										fontSize: 24,
+										position: "absolute",
+										top: "50%",
+										left: "50%",
+										marginTop: "-18px",
+										marginLeft: "-50px",
+									}}
+								>
+									VIETTECH
+								</Typography>
+							</Box>
 
 							<Box marginLeft={2}>{SignButton}</Box>
 						</Stack>
