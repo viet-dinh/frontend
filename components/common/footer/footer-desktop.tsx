@@ -5,6 +5,7 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
+import { Container } from "@mui/system";
 
 export interface FooterDesktopProps {}
 
@@ -13,53 +14,64 @@ function FooterDesktop(props: FooterDesktopProps) {
 		<Box
 			sx={{
 				backgroundColor: "#474646",
-				padding: "60px 90px 32px 90px",
 				color: "white",
 			}}
 		>
-			<Stack spacing={2}>
-				<Typography
-					sx={{
-						fontFamily: "Oleo Script",
-						fontSize: 24,
-					}}
-				>
-					VIETTECH
-				</Typography>
-				<Box>
-					<Stack direction={"row"} spacing={10}>
-						<Stack spacing={1} maxWidth="400px">
-							<Typography>
-								Lorem ipsum dolor sit amet, consectetur adipiscing elit,
-								sed do eiusmod tempor incididunt ut labore et dolore magna
-								aliqua
-							</Typography>
-							<Stack direction={"row"} spacing={1}>
-								<FacebookIcon />
-								<TwitterIcon />
-							</Stack>
-						</Stack>
-
-						<Stack spacing={1}>
-							<Stack direction={"row"} spacing={1}>
-								<MailOutlineIcon />
-								<Typography>dinhquocvietpro@gmail.com</Typography>
-							</Stack>
-							<Stack direction={"row"} spacing={1}>
-								<LocationOnIcon />
+			<Container
+				sx={{
+					paddingTop: "40px",
+					paddingBottom: "40px",
+				}}
+			>
+				<Stack spacing={2}>
+					<Typography
+						sx={{
+							fontFamily: "Oleo Script",
+							fontSize: 24,
+						}}
+					>
+						VIETTECH
+					</Typography>
+					<Box>
+						<Stack direction={"row"}>
+							<Stack
+								spacing={1}
+								flexGrow="1"
+								maxWidth={"50%"}
+								paddingRight="16px"
+							>
 								<Typography>
-									71/6 Chu Văn AnPhường 26, Bình Thạnh, Thành phố Hồ Chí
-									Minh
+									Lorem ipsum dolor sit amet, consectetur adipiscing
+									elit, sed do eiusmod tempor incididunt ut labore et
+									dolore magna aliqua
 								</Typography>
+								<Stack direction={"row"} spacing={1}>
+									<FacebookIcon />
+									<TwitterIcon />
+								</Stack>
 							</Stack>
-							<Stack direction={"row"} spacing={1}>
-								<LocalPhoneIcon />
-								<Typography>0397167138</Typography>
+
+							<Stack spacing={1} flexGrow="1">
+								<Stack direction={"row"} spacing={1}>
+									<MailOutlineIcon />
+									<Typography>dinhquocvietpro@gmail.com</Typography>
+								</Stack>
+								<Stack direction={"row"} spacing={1}>
+									<LocationOnIcon />
+									<Typography>
+										71/6 Chu Văn AnPhường 26, Bình Thạnh, Thành phố Hồ
+										Chí Minh
+									</Typography>
+								</Stack>
+								<Stack direction={"row"} spacing={1}>
+									<LocalPhoneIcon />
+									<Typography>0397167138</Typography>
+								</Stack>
 							</Stack>
 						</Stack>
-					</Stack>
-				</Box>
-			</Stack>
+					</Box>
+				</Stack>
+			</Container>
 		</Box>
 	);
 }
