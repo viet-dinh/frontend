@@ -1,7 +1,6 @@
 import { useAuth } from "@/hook";
 import MainLayout from "@/layout/main";
 import { NextPageWithLayout } from "@/models";
-import { Button, Typography } from "@mui/material";
 import { Box, Container } from "@mui/system";
 import { Configuration, OpenAIApi } from "openai";
 import { useEffect, useState } from "react";
