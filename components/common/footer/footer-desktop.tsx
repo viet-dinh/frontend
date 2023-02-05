@@ -4,6 +4,7 @@ import TwitterIcon from "@mui/icons-material/Twitter";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import LocalPhoneIcon from "@mui/icons-material/LocalPhone";
+import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import { Container } from "@mui/system";
 
 export interface FooterDesktopProps {}
@@ -65,6 +66,10 @@ function FooterDesktop(props: FooterDesktopProps) {
 								<Stack direction={"row"} spacing={1}>
 									<LocalPhoneIcon />
 									<Typography>0397167138</Typography>
+								</Stack>
+								<Stack direction={"row"} spacing={1}>
+									<AttachMoneyIcon />
+									<Typography>USDT address (PEP-20): commin soon</Typography>
 								</Stack>
 							</Stack>
 						</Stack>

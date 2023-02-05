@@ -4,7 +4,9 @@ import * as React from "react";
 export interface HeaderMobileProps {}
 
 function HeaderMobile(props: HeaderMobileProps) {
-	return <Box display={{ xs: "block", md: "none" }}>Please use Desktop</Box>;
+	return <h1 display={{ xs: "block", md: "none" }}>
+		Meo Meo!!
+	</h1>;
 }
 
 export { HeaderMobile };
