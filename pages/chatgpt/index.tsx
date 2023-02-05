@@ -76,9 +76,10 @@ const ChatGPTPage: NextPageWithLayout = (props: ChatGPTPageProps) => {
 				maxHeight: '1/2'
 			}}>
 				<Box>
-					{messages.map(message=> {
+					{messages.map((message, index)=> {
 						if (!message.isGPT) {
 							return <MessageRight
+							key={index}
 							message={message.body}
 							timestamp={message.time}
 							avatarDisp={false}
@@ -86,6 +87,7 @@ const ChatGPTPage: NextPageWithLayout = (props: ChatGPTPageProps) => {
 						}
 
 						return <MessageLeft
+						key={index}
 						message={message.body}
 						timestamp={message.time}
 						photoURL="https://lh3.googleusercontent.com/a-/AOh14Gi4vkKYlfrbJ0QLJTg_DLjcYyyK7fYoWRpz2r4s=s96-c"

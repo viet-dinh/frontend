@@ -122,7 +122,7 @@ export const MessageLeft = (props) => {
   const classes = useStyles();
   return (
     <>
-      <div className={classes.messageRow}>
+      <div id={props.id} className={classes.messageRow}>
         <Avatar
           alt={displayName}
           className={classes.orange}
@@ -147,7 +147,7 @@ export const MessageRight = (props) => {
   const message = props.message ? props.message : "no message";
   const timestamp = props.timestamp ? props.timestamp : "";
   return (
-    <div className={classes.messageRowRight}>
+    <div id={props.id} className={classes.messageRowRight}>
       <div className={classes.messageOrange}>
         <p className={classes.messageContent}>{message}</p>
         <div className={classes.messageTimeStampRight}>{timestamp}</div>
