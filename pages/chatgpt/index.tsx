@@ -2,7 +2,7 @@ import { useAuth } from "@/hook";
 import MainLayout from "@/layout/main";
 import { NextPageWithLayout } from "@/models";
 import { Box, Container } from "@mui/system";
-import { Configuration, OpenAIApi } from "openai";
+import { Configuration, CreateCompletionRequestPrompt, OpenAIApi } from "openai";
 import { useEffect, useState } from "react";
 import {MessageRight, MessageLeft} from "./Message"
 import moment from 'moment';
@@ -31,9 +31,9 @@ const getCurrentDate = () => {
 const ChatGPTPage: NextPageWithLayout = (props: ChatGPTPageProps) => {
 	//const { session, signIn, signOut } = useAuth();
 
-	const [response, setResponse] = useState<String>('');
+	const [response, setResponse] = useState<string>('');
 	const [isFetching, setIsFetching] = useState(false);
-	const [question, setQuestion] = useState<String>('');
+	const [question, setQuestion] = useState<string>('');
 	const [messages, setMessages] = useState(() => [
 		createMessage(getCurrentDate(), 'Ask me anything?', true)
 	]);
@@ -64,7 +64,7 @@ const ChatGPTPage: NextPageWithLayout = (props: ChatGPTPageProps) => {
 		  }).then(data => {
 			setIsFetching(false);
 			setMessages(messages => [...messages.slice(0,-1), createMessage(getCurrentDate(), data?.data?.choices[0].text, true)])
-			setResponse(data?.data?.choices[0].text);
+			setResponse(data?.data?.choices[0].text ?? '');
 		  });
 	}
 	
