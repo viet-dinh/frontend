@@ -17,7 +17,7 @@ export default function MainLayout(props: LayoutProps) {
 	return (
 		<Stack minHeight={"100vh"}>
 			<Header />
-			<Box component={"main"} flexGrow={1} marginTop={isMobile ? 0 : "30px"}>
+			<Box component={"main"} flexGrow={1} marginTop={isMobile ? 0 : "100px"}>
 				{props.children}
 			</Box>
 			<Footer />
