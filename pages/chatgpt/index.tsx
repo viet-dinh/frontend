@@ -11,7 +11,7 @@ import TextField from '@mui/material/TextField';
 
 const configuration = new Configuration({
     organization: "org-6pOkSCD9aNlSwnwhQ0FLUujA",
-    apiKey: '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',
+    apiKey: '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',
 });
 
 export interface ChatGPTPageProps {}
