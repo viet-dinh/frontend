@@ -4,6 +4,10 @@ export const ROUTE_LIST = [
 		path: "/",
 	},
 	{
+		label: "ChatGPT Free",
+		path: "/chatgpt",
+	},
+	{
 		label: "About",
 		path: "/about",
 	},
