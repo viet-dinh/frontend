@@ -11,7 +11,7 @@ import TextField from '@mui/material/TextField';
 
 const configuration = new Configuration({
     organization: "org-6pOkSCD9aNlSwnwhQ0FLUujA",
-    apiKey: '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',
+    apiKey: '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',
 });
 
 export interface ChatGPTPageProps {}
@@ -63,8 +63,10 @@ const ChatGPTPage: NextPageWithLayout = (props: ChatGPTPageProps) => {
 			temperature: 0,
 		  }).then(data => {
 			setIsFetching(false);
-			setMessages(messages => [...messages.slice(0,-1), createMessage(getCurrentDate(), data?.data?.choices[0].text, true)])
-			setResponse(data?.data?.choices[0].text ?? '');
+			setMessages(messages => [...messages.slice(0,-1), createMessage(getCurrentDate(), data?.data?.choices[0].text ?? '', true)])
+		  }).catch(e => {
+			setIsFetching(false);
+			setMessages(messages => [...messages.slice(0,-1), createMessage(getCurrentDate(), 'Xin lỗi tôi hết tiền :)))', true)])
 		  });
 	}
 	
