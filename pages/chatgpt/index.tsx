@@ -7,12 +7,18 @@ import { useEffect, useState } from "react";
 import {MessageRight, MessageLeft} from "./Message"
 import moment from 'moment';
 import LinearProgress from '@mui/material/LinearProgress';
-import TextField from '@mui/material/TextField';  
+import IconButton from '@mui/material/IconButton';
+import Input from '@mui/material/Input';
+import FilledInput from '@mui/material/FilledInput';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
+import InputAdornment from '@mui/material/InputAdornment';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
+import TextField from '@mui/material/TextField';
+import SendIcon from '@mui/icons-material/Send';
+import axios from "axios";
 
-const configuration = new Configuration({
-    organization: "org-6pOkSCD9aNlSwnwhQ0FLUujA",
-    apiKey: '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',
-});
 
 export interface ChatGPTPageProps {}
 
@@ -25,6 +31,7 @@ const createMessage = (time: any, body: any, isGPT: any) => {
 }
 
 const getCurrentDate = () => {
+	console.log(process.env.CHATGPT_SECRET)
 	return moment().format('DD/MM/YYYY, h:mm:ss a');
 }
 
@@ -42,7 +49,7 @@ const ChatGPTPage: NextPageWithLayout = (props: ChatGPTPageProps) => {
 		setQuestion(event.target.value);
 	  };
 
-	const fetch = () => {
+	const findAnswer = () => {
 		if (!question) {
 			return;
 		}
@@ -51,19 +58,19 @@ const ChatGPTPage: NextPageWithLayout = (props: ChatGPTPageProps) => {
 
 		setQuestion('');
 
+		console.log(process.env.CHATGPT_SECRET)
+		console.log(process.env.FACEBOOK_CLIENT_SECRET)
+		
  
-		const openai = new OpenAIApi(configuration);
 		setMessages(messages => [...messages, createMessage(getCurrentDate(), question, false), createMessage(getCurrentDate(), <LinearProgress/>, true)])
 
 		setIsFetching(true);
-		openai.createCompletion({
-			model: "text-davinci-003",
-			prompt: prompt,
-			max_tokens: 200,
-			temperature: 0,
-		  }).then(data => {
+
+		fetch(`/api/chatgpt?question=${prompt}`)
+		.then(res => res.json())
+		.then(data => {
 			setIsFetching(false);
-			setMessages(messages => [...messages.slice(0,-1), createMessage(getCurrentDate(), data?.data?.choices[0].text ?? '', true)])
+			setMessages(messages => [...messages.slice(0,-1), createMessage(getCurrentDate(), data?.answer ?? '', true)])
 		  }).catch(e => {
 			setIsFetching(false);
 			setMessages(messages => [...messages.slice(0,-1), createMessage(getCurrentDate(), 'Xin lỗi tôi hết tiền :)))', true)])
@@ -72,12 +79,15 @@ const ChatGPTPage: NextPageWithLayout = (props: ChatGPTPageProps) => {
 	
 	return (
 		<Box>
-			<Box sx={{
-				height: '1/2',
-				width: '100%',
-				maxHeight: '1/2'
+			<Box 
+			sx={{
+				// height: '50vh',
+				// minHeight: '50%',//change here,
+				// overflow: 'auto',
 			}}>
-				<Box>
+				<Box sx={{
+					marginBottom: '50px'
+					}}>
 					{messages.map((message, index)=> {
 						if (!message.isGPT) {
 							return <MessageRight
@@ -93,22 +103,33 @@ const ChatGPTPage: NextPageWithLayout = (props: ChatGPTPageProps) => {
 						message={message.body}
 						timestamp={message.time}
 						photoURL="https://lh3.googleusercontent.com/a-/AOh14Gi4vkKYlfrbJ0QLJTg_DLjcYyyK7fYoWRpz2r4s=s96-c"
-						displayName="Chat GPT"
+						displayName="My name is Vàng"
 						avatarDisp={true}
 					  />
 					})}
 				</Box>
 
-			<TextField
+			<FormControl sx={{width: "100%"}}>
+				<InputLabel htmlFor="chat">{!isFetching ? "Enter your question" : "Please wait meoooo"}</InputLabel>
+				<OutlinedInput
 				fullWidth
 				disabled={isFetching}
-				id="filled-helperText"
+				id="chat"
 				label="Enter Your question"
 				defaultValue=""
-				helperText="I wish you lots of fun!"
-				variant="filled"
 				value={question}
 				onChange={handleChange}
+				endAdornment={
+					<InputAdornment position="end">
+					  <IconButton
+						aria-label="toggle password visibility"
+						onClick={() => findAnswer()}
+						edge="end"
+					  >
+						  <SendIcon/>
+					  </IconButton>
+					</InputAdornment>
+				  }
 				onKeyUp={e => {
 
 					if(e.keyCode != 13){
@@ -118,9 +139,10 @@ const ChatGPTPage: NextPageWithLayout = (props: ChatGPTPageProps) => {
 						return
 					}
 
-					fetch();
+					findAnswer();
 				}}
 				/>
+			</FormControl>
 			</Box>
 		</Box>
 	);

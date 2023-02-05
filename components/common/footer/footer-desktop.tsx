@@ -1,5 +1,4 @@
 import { Box, Stack, Toolbar, Typography } from "@mui/material";
-import { styled } from "@mui/material/styles";
 import FacebookIcon from "@mui/icons-material/Facebook";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
