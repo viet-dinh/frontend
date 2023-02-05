@@ -2,6 +2,9 @@ import Cookies from "cookies";
 import httpProxy from "http-proxy";
 import { NextApiRequest, NextApiResponse } from "next";
 import { Configuration, CreateCompletionRequestPrompt, OpenAIApi } from "openai";
+var CryptoJS = require("crypto-js");
+
+
 
 const API_URL = process.env.API_URL || "https://js-post-api.herokuapp.com";
 const proxy = httpProxy.createProxyServer();
@@ -14,9 +17,12 @@ export const config = {
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
 	if (req.method === "GET") {
+		const bytes  = CryptoJS.AES.decrypt(process.env.CHATGPT_SECRET, 'aza');
+
+		const key = bytes.toString(CryptoJS.enc.Utf8);
 		const configuration = new Configuration({
 			organization: "org-6pOkSCD9aNlSwnwhQ0FLUujA",
-			apiKey: process.env.CHATGPT_SECRET,
+			apiKey: key,
 		});
 
 		const openai = new OpenAIApi(configuration);
@@ -30,7 +36,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
 		  }).then(data => {
 			res.status(200).json({answer: data?.data?.choices[0]?.text});
 		  }).catch(e => {
-			console.log(e)
+			//console.log(e.response)
 			res.status(500).json({ error: 'error'});
 		  });
  
