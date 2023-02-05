@@ -155,3 +155,9 @@ export const MessageRight = (props) => {
     </div>
   );
 };
+
+const Message = () => {
+  return <div>afke</div>;
+}
+
+export default Message;
