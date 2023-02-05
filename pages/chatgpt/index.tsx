@@ -67,10 +67,6 @@ const ChatGPTPage: NextPageWithLayout = (props: ChatGPTPageProps) => {
 			setResponse(data?.data?.choices[0].text);
 		  });
 	}
-
-	useEffect(() => {
-		fetch();
-	}, [])
 	
 	return (
 		<Box>
