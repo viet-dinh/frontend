@@ -8,6 +8,10 @@ export const ROUTE_LIST = [
 		path: "/chatgpt",
 	},
 	{
+		label: "NFT Marketplace",
+		path: "/market-place",
+	},
+	{
 		label: "About",
 		path: "/about",
 	},
@@ -15,8 +19,8 @@ export const ROUTE_LIST = [
 		label: "My Profile",
 		path: "/profile",
 	},
-	{
-		label: "Services",
-		path: "/service",
-	},
+	// {
+	// 	label: "Services",
+	// 	path: "/service",
+	// },
 ];

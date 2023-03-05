@@ -21,6 +21,7 @@ import clsx from "clsx";
 import { useSession } from "next-auth/react";
 import { useAuth } from "@/hook";
 import { styled } from "@mui/material/styles";
+import { ConnectWallet } from "@thirdweb-dev/react";
 
 export interface HeaderDesktopProps {}
 
@@ -91,7 +92,7 @@ function HeaderDesktop(props: HeaderDesktopProps) {
 				variant="outlined"
 				color="primary"
 			>
-				<Typography variant="subtitle2">Login</Typography>
+				<Typography variant="subtitle2">Login web 2</Typography>
 			</Button>
 		);
 
@@ -155,6 +156,7 @@ function HeaderDesktop(props: HeaderDesktopProps) {
 							</Box>
 
 							<Box marginLeft={2}>{SignButton}</Box>
+							<Box marginLeft={1}><ConnectWallet/></Box>
 						</Stack>
 					</Toolbar>
 				</Container>

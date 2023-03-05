@@ -9,9 +9,12 @@ import { createEmotionCache, theme } from "@/mui-style";
 import { CacheProvider } from "@emotion/react";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/material/styles";
+import { ChainId } from "@thirdweb-dev/sdk";
+import { ThirdwebProvider } from "@thirdweb-dev/react";
 
 // Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
+const CURRENT_CHAIN_ID = ChainId.Polygon; 
 
 function MyApp({
 	Component,
@@ -28,6 +31,7 @@ function MyApp({
 		>
 			<CacheProvider value={emotionCache}>
 				<ThemeProvider theme={theme}>
+
 					{/* CssBaseline kickstart an elegant, consistent, and simple baseline to build upon. */}
 					<CssBaseline />
 
@@ -37,9 +41,18 @@ function MyApp({
 							shouldRetryOnError: false,
 						}}
 					>
-						<Layout>
-							<Component {...pageProps} />
-						</Layout>
+						<ThirdwebProvider 
+							desiredChainId={CURRENT_CHAIN_ID}
+							dAppMeta={{
+								name: "Viet Tech",
+								isDarkMode: false,
+							  }}
+							>
+							<Layout>
+								<Component {...pageProps} />
+							</Layout>
+						</ThirdwebProvider>;
+		
 					</SWRConfig>
 				</ThemeProvider>
 			</CacheProvider>
