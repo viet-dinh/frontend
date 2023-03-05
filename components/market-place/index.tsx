@@ -17,7 +17,7 @@ const MarketPlace: NextPageWithLayout = (props: IMarketPlaceProps) => {
 
 	return	<Box>
 			<Typography variant="h6">My NFTs</Typography>
-			<MyNFTs></MyNFTs>
+			<MyNFTs/>
 			<Typography variant="h6">Market</Typography>
 			{isLoading ? <CircularProgress /> :
 				<Box sx={{
@@ -26,17 +26,19 @@ const MarketPlace: NextPageWithLayout = (props: IMarketPlaceProps) => {
 					gridTemplateColumns: 'repeat(4, 1fr)',
 					}}>
 					{data && data.map((nft, index) => {
-						return <NFT nft={{
+						return <NFT 
+						key={index} 
+						nft={{
 							name: nft.asset.name,
 							src: nft.asset.image,
 							value: 'Price: ' + nft.buyoutCurrencyValuePerToken.displayValue,
-							description: 'hihi'
+							description: ''
 						}} 
 						onClick={async () => {
 							try {
 								await marketPlaceContract?.buyoutListing(BigNumber.from(nft.id), 1)
 							} catch (error) {
-								alert(error?.message)
+								console.log(error)
 							}
 						}}/>
 					})}

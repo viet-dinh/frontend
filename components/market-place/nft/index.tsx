@@ -1,4 +1,3 @@
-import { NextPageWithLayout } from "../../../models";
 import * as React from 'react';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
@@ -6,23 +5,21 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Button, CardActionArea, CardActions } from '@mui/material';
 
-
-interface NFT {
-    name: string;
-    src: string;
-    value: number;
-    description: string;
-  }
-
 export interface INFTProps {
-    nft: NFT,
+    nft: {
+        name: any;
+        src: any;
+        value: any;
+        description: any;
+      },
     onClick: any,
+    key: any
 }
 
-const NFT: NextPageWithLayout = (props: INFTProps) => {
-    const {nft: {name, src, value, description}, onClick} = props;
+const NFT = (props: INFTProps) => {
+    const {key, nft: {name, src, value, description}, onClick} = props;
 
-	return  <Card sx={{ maxWidth: 345 }}>
+	return  <Card key={key} sx={{ maxWidth: 345 }}>
     <CardActionArea>
       <CardMedia
         component="img"

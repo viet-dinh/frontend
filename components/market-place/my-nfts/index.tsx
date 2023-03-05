@@ -8,7 +8,7 @@ import { BigNumber } from "ethers";
 
 export interface IMyNFTsProps {}
 
-const MyNFTs: NextPageWithLayout = (props: IMyNFTsProps) => {
+const MyNFTs = (props: IMyNFTsProps) => {
 	const address = useAddress();
     const {contract} = useContract('0xB91e51Fc0549FC9c69cA1ac48756254eB578Ee18');
     const { data, isLoading, error } = useOwnedNFTs(
@@ -18,7 +18,7 @@ const MyNFTs: NextPageWithLayout = (props: IMyNFTsProps) => {
 
     console.log(data);
     if (!address) {
-        return 'Please login web 3 your wallet';
+        return <Box>Please login web 3 your wallet</Box>;
     }
 
 	return <div>
@@ -28,14 +28,14 @@ const MyNFTs: NextPageWithLayout = (props: IMyNFTsProps) => {
         ) : (
         <div>
             {data?.length === 0 && 'Please buy NFT to hold'}
-            {data?.map((nft) => (
-            <span>
+            {data?.map((nft, i) => (
+            <span key={i}>
             <ThirdwebNftMedia
                 key={nft.metadata.id}
                 metadata={nft.metadata}
                 height={'200px'}
             />
-            <Typography>{nft.name}</Typography>
+            <Typography>{nft.metadata.name}</Typography>
             </span>
             ))}
         </div>
